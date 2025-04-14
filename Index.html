@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IP Info</title>
+  <script>
+    async function getIPInfo() {
+      const res = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
+
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(ipData => {
+          const info = {
+            ip: ipData.ip,
+            city: data.city,
+            region: data.region,
+            country: data.country_name,
+            org: data.org,
+            os: navigator.platform,
+            browser: navigator.userAgent,
+            time: new Date().toLocaleString()
+          };
+          console.log(info);
+        });
+    }
+
+    window.onload = getIPInfo;
+  </script>
+</head>
+<body>
+  <h2>Loading...</h2>
+</body>
+</html>
